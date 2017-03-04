@@ -15,18 +15,18 @@ namespace tutorials
                       "~/Scripts/bootstrap.min.js",
                       "~/Scripts/respond.js"));
 
-            bundles.Add(new StyleBundle("~/bundles/datatables").Include(
+            bundles.Add(new ScriptBundle("~/bundles/datatables").Include(
                     "~/Scripts/DataTables/jquery.dataTables.min.js",
                     "~/Scripts/DataTables/dataTables.bootstrap.min.js",
                     "~/Scripts/DataTables/dataTables.colReorder.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.min.css",
-                      "~/Content/site.css",
                       "~/Content/DataTables/css/jquery.dataTables.min.css",
                       "~/Content/DataTables/css/jquery.dataTables_themeroller.css",
                       "~/Content/DataTables/css/dataTables.bootstrap.min.css",
-                      "~/Content/DataTables/css/colReorder.dataTables.min.css"));
+                      "~/Content/DataTables/css/colReorder.dataTables.min.css",
+                      "~/Content/Site.css"));
         }
     }
 }
