@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -17,6 +18,11 @@ namespace tutorials.Controllers
         // GET: Contacts
         public ActionResult Index()
         {
+            var userid = new Guid(User.Identity.GetUserId());
+            var username = User.Identity.GetUserName();
+            ViewBag.UserName = username;
+            ViewBag.UserId = userid;
+
             return View(db.Contacts.ToList());
         }
 

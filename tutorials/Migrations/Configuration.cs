@@ -26,6 +26,21 @@ namespace tutorials.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+            context.Contacts.AddOrUpdate(
+                p => p.Id,
+                new Models.Contact
+                {
+                    Id = 1,
+                    firstName = "aseem",
+                    lastName = "sethi",
+                    email = "aseemsethi@yahoo.com",
+                    streetAddress1 = "385",
+                    streetAddress2 = "Phase2",
+                    City = "Bangalore",
+                    State = "KA",
+                    Zip = "560066",
+                    userId = new Guid("30af6bbc-713b-44b7-a9ee-763ba3bf3606")
+                });
         }
     }
 }
