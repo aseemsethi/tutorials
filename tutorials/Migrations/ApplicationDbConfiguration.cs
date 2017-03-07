@@ -5,14 +5,15 @@ namespace tutorials.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<tutorials.Models.tutorialsContext>
+    internal sealed class ApplicationDbConfiguration : DbMigrationsConfiguration<tutorials.Models.ApplicationDbContext>
     {
-        public Configuration()
+        public ApplicationDbConfiguration()
         {
             AutomaticMigrationsEnabled = true;
+            ContextKey = "tutorials.Models.ApplicationDbContext";
         }
 
-        protected override void Seed(tutorials.Models.tutorialsContext context)
+        protected override void Seed(tutorials.Models.ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 
