@@ -5,14 +5,14 @@ namespace tutorials.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<tutorials.Models.tutorialsContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<tutorials.Models.ApplicationDbContext>
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(tutorials.Models.tutorialsContext context)
+        protected override void Seed(tutorials.Models.ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 
@@ -26,21 +26,6 @@ namespace tutorials.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
-            context.Contacts.AddOrUpdate(
-                p => p.Id,
-                new Models.Contact
-                {
-                    Id = 1,
-                    firstName = "aseem",
-                    lastName = "sethi",
-                    email = "aseemsethi@yahoo.com",
-                    streetAddress1 = "385",
-                    streetAddress2 = "Phase2",
-                    City = "Bangalore",
-                    State = "KA",
-                    Zip = "560066",
-                    userId = new Guid("30af6bbc-713b-44b7-a9ee-763ba3bf3606")
-                });
         }
     }
 }
