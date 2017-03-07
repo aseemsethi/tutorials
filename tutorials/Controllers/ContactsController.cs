@@ -16,17 +16,19 @@ namespace tutorials.Controllers
         private tutorialsContext db = new tutorialsContext();
 
         // GET: Contacts
+        [Authorize]
         public ActionResult Index()
         {
-            var userid = new Guid(User.Identity.GetUserId());
+            var userid = GetCurrentUserId();
             var username = User.Identity.GetUserName();
             ViewBag.UserName = username;
             ViewBag.UserId = userid;
 
-            return View(db.Contacts.ToList());
+            return View(db.Contacts.Where(x => x.userId == userid).ToList());
         }
 
         // GET: Contacts/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -42,6 +44,7 @@ namespace tutorials.Controllers
         }
 
         // GET: Contacts/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -52,6 +55,7 @@ namespace tutorials.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create([Bind(Include = "Id,userId,firstName,lastName,email,phone,streetAddress1,streetAddress2,City,State,Zip")] Contact contact)
         {
             if (ModelState.IsValid)
@@ -84,6 +88,7 @@ namespace tutorials.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "Id,userId,firstName,lastName,email,phone,streetAddress1,streetAddress2,City,State,Zip")] Contact contact)
         {
             if (ModelState.IsValid)
@@ -113,6 +118,7 @@ namespace tutorials.Controllers
         // POST: Contacts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             Contact contact = db.Contacts.Find(id);
@@ -121,6 +127,7 @@ namespace tutorials.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize]
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -129,5 +136,15 @@ namespace tutorials.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public Guid GetCurrentUserId()
+        {
+            return new Guid(User.Identity.GetUserId());
+        }
+        private bool EnsureIsUserContact(Contact c)
+        {
+            return c.userId == GetCurrentUserId();
+        }
+
     }
 }
